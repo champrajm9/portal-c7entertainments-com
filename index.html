@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>c7娱乐 · 再次遇见，一直同在</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fceae5 0%, #fbebda 50%, #f6dfcf 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.2rem;
+            line-height: 1.5;
+            color: #2b2b2b;
+        }
+        .page {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* 卡片主容器 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin: 2.5rem 0 1.8rem;
+        }
+        @media (max-width: 720px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            body {
+                padding: 1.2rem 0.9rem;
+            }
+        }
+
+        .card {
+            background: #fffffffa;
+            backdrop-filter: blur(2px);
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 12px 28px rgba(170, 110, 70, 0.12), 0 4px 12px rgba(0,0,0,0.03);
+            padding: 1.8rem 1.6rem 2rem;
+            transition: transform 0.2s ease, box-shadow 0.25s ease;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 32px rgba(160, 90, 60, 0.18);
+        }
+
+        .hero-card {
+            grid-column: 1 / -1;
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 2.4rem 2.4rem 2.8rem;
+            box-shadow: 0 18px 30px rgba(180, 110, 70, 0.12);
+            margin-bottom: 0.2rem;
+        }
+        @media (max-width: 720px) {
+            .hero-card {
+                padding: 1.8rem 1.2rem;
+            }
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #3e2c22;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        h1 small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #8d7669;
+            background: #eedfd6;
+            padding: 0.1rem 1rem;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+        }
+        .hero-sub {
+            font-size: 1.1rem;
+            color: #4f3c30;
+            max-width: 650px;
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
+        }
+        .hero-tagline {
+            display: inline-block;
+            background: #e6d6cb;
+            color: #2f231d;
+            font-weight: 450;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+        }
+        .hero-intro {
+            margin-top: 1.2rem;
+            color: #3d3129;
+            font-size: 1.03rem;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 540;
+            color: #35281f;
+            margin-bottom: 1.2rem;
+            border-left: 6px solid #dbb6a4;
+            padding-left: 1rem;
+        }
+        .card p {
+            margin-bottom: 1rem;
+            color: #3c322c;
+        }
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 0.8rem 0 0.2rem;
+        }
+        .feature-list li {
+            padding: 0.45rem 0 0.45rem 1.8rem;
+            position: relative;
+            color: #3a2f28;
+        }
+        .feature-list li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: #c8957b;
+            font-size: 1.1rem;
+        }
+
+        .audience-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 0.8rem;
+            margin: 0.4rem 0 0.6rem;
+        }
+        .audience-tag {
+            background: #efe3db;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #2e231d;
+        }
+
+        .link-natural {
+            margin-top: 1.6rem;
+            background: #faf6f2;
+            padding: 1.2rem 1.4rem;
+            border-radius: 24px;
+            font-size: 1rem;
+            line-height: 1.6;
+            border: 1px solid #f0e4db;
+        }
+        .link-natural a {
+            color: #7a4d36;
+            font-weight: 550;
+            text-decoration: none;
+            border-bottom: 2px solid #dbb29b;
+            padding-bottom: 1px;
+            transition: border 0.2s, background 0.1s;
+        }
+        .link-natural a:hover {
+            border-bottom-color: #a56f53;
+            background: #edddd1;
+            border-radius: 4px;
+        }
+
+        .faq-sample {
+            margin: 2.2rem 0 1.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.4rem;
+            justify-content: flex-start;
+            background: #f2e7dfba;
+            padding: 1.4rem 1.8rem;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+        }
+        .faq-sample span {
+            font-weight: 460;
+            color: #3a2b22;
+        }
+        .faq-sample small {
+            color: #665448;
+        }
+
+        .footnote {
+            text-align: center;
+            margin-top: 2.8rem;
+            color: #635247;
+            font-size: 0.9rem;
+            border-top: 1px solid #decbc0;
+            padding-top: 1.8rem;
+        }
+
+        .btn-soft {
+            display: inline-block;
+            background: #dbbcaa;
+            color: #1f140f;
+            border-radius: 60px;
+            padding: 0.3rem 1.2rem;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: background 0.2s, color 0.1s;
+            border: 1px solid #d0b19e;
+        }
+        .btn-soft:hover {
+            background: #c7a490;
+            color: #0f0906;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero 主视觉卡片 -->
+    <div class="hero-card">
+        <h1>
+            c7娱乐
+            <small>· 收藏此刻</small>
+        </h1>
+        <div class="hero-sub">
+            把喜欢的地方留在书签里，是很多人下意识的温柔。<br>
+            再次访问 <a href="https://portal-c7entertainments.com" style="color:#7a4d36; font-weight:500; text-decoration:underline 1px dashed #b28b78;">c7娱乐</a>，就像翻到一本常读的杂志，
+            熟悉中总带着一点新内容。
+        </div>
+        <div class="hero-tagline">✦ 持续关注 · 日常更新</div>
+        <div class="hero-intro">
+            信息卡片式介绍，帮你快速了解这里的氛围与用途。
+            不需要刻意记住，随时回来就能接续之前的节奏。
+        </div>
+    </div>
+
+    <!-- 信息卡片网格 -->
+    <div class="card-grid">
+
+        <!-- 用途卡片 -->
+        <div class="card">
+            <h2>📋 平时用途</h2>
+            <p>这里并非单一功能的页面，更像一个轻内容聚合角落：</p>
+            <ul class="feature-list">
+                <li>浏览新鲜资讯与主题短文</li>
+                <li>查看图文混排的轻内容</li>
+                <li>发现兴趣向的推荐与索引</li>
+                <li>偶尔更新的 FAQ 式小提示</li>
+            </ul>
+            <p style="margin-top:0.8rem;">如果你习惯碎片化阅读，或者喜欢在放松时随意翻翻，<br>
+            把 <a href="https://portal-c7entertainments.com" style="color:#7a4d36;font-weight:500;">c7娱乐</a> 加入书签也许是个不错的选择。</p>
+        </div>
+
+        <!-- 适合人群卡片 -->
+        <div class="card">
+            <h2>👥 适合谁</h2>
+            <div class="audience-tags">
+                <span class="audience-tag">轻探索者</span>
+                <span class="audience-tag">日常刷新派</span>
+                <span class="audience-tag">收藏党</span>
+                <span class="audience-tag">随性读者</span>
+                <span class="audience-tag">回头客</span>
+            </div>
+            <p>无论你是第一次路过，还是已经来过几次，<br>这里都保持一种“低门槛、不压迫”的节奏。</p>
+            <p style="margin-top:0.6rem;">喜欢把好用页面留着以后慢慢看的人，<br>往往能在这里找到持续关注的舒适感。</p>
+        </div>
+
+    </div><!-- card-grid end -->
+
+    <!-- 自然链接段落 + 再次访问提示 -->
+    <div class="link-natural">
+        <strong style="color:#35281f;">📎 再访 · 收藏 · 日常</strong><br>
+        很多人习惯在浏览器里留着几个常去的页面，<a href="https://portal-c7entertainments.com">c7娱乐</a> 就是其中一种。
+        不需要每次重新搜索，打开书签就能回到熟悉的界面。<br>
+        如果你今天刚注意到这里，不妨先随手收藏——<br>
+        以后哪天想起来，再回来看看，内容或许已经有了一些变化。
+    </div>
+
+    <!-- FAQ 摘要  -->
+    <div class="faq-sample">
+        <span>❓ 常见随手问题</span>
+        <small>内容会定期更新吗？</small>
+        <small>— 会，但不频繁，适合偶尔回来。</small>
+        <small>需要注册吗？</small>
+        <small>— 直接浏览，无需额外步骤。</small>
+        <span style="margin-left:auto;"><a href="https://portal-c7entertainments.com" class="btn-soft">c7娱乐</a></span>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footnote">
+        <span>把遇见变成收藏 · 把收藏变成日常</span><br>
+        <span style="opacity:0.7;">页面内容仅供示意，实际以网站为准</span>
+    </div>
+
+</div>
+</body>
+</html>

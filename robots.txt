@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://champrajm9.github.io/portal-c7entertainments-com/sitemap.xml
